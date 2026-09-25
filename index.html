@@ -1,0 +1,531 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Test de Dependencias Orgánicas · DGP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy-900:#0a1a33;
+  --navy-800:#0f2547;
+  --navy-700:#16305e;
+  --navy-600:#1e3d74;
+  --gold:#c9a24b;
+  --gold-light:#e6c877;
+  --cream:#f4f1e8;
+  --paper:#faf8f2;
+  --red:#9c1f2e;
+  --green:#276b45;
+  --ink:#1a2130;
+  --muted:#6b7280;
+}
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  min-height:100vh;
+  background:
+    radial-gradient(1100px 700px at 15% -10%, #16305e 0%, transparent 55%),
+    radial-gradient(900px 600px at 110% 10%, #0f2547 0%, transparent 50%),
+    linear-gradient(180deg, var(--navy-900) 0%, #081428 100%);
+  font-family:'Inter',sans-serif;
+  color:var(--cream);
+  padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px);
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:760px;
+  margin:0 auto;
+  padding:36px 20px 60px;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+/* ---------- header / crest ---------- */
+.crest{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:28px;
+}
+.crest svg{width:52px;height:52px;flex:none;}
+.crest-text .kicker{
+  font-size:12.5px;
+  letter-spacing:.04em;
+  color:var(--gold-light);
+  opacity:.85;
+}
+.crest-text h1{
+  font-family:'Cormorant Garamond',serif;
+  font-weight:700;
+  font-size:26px;
+  line-height:1.05;
+  margin:2px 0 0;
+  color:var(--paper);
+}
+/* ---------- screens ---------- */
+.screen{display:none;flex:1;flex-direction:column;}
+.screen.active{display:flex;}
+
+/* ---------- intro ---------- */
+#intro{align-items:stretch;justify-content:center;text-align:center;}
+.badge-hero{
+  width:128px;height:128px;margin:0 auto 22px;
+  animation:riseIn .7s cubic-bezier(.2,.9,.25,1) both;
+}
+@keyframes riseIn{from{opacity:0;transform:translateY(14px) scale(.96);}to{opacity:1;transform:none;}}
+#intro h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(30px,6vw,42px);
+  font-weight:700;
+  margin:0 0 10px;
+  color:var(--paper);
+  letter-spacing:.01em;
+}
+#intro .lede{
+  color:#c7cee0;
+  font-size:16px;
+  line-height:1.6;
+  max-width:520px;
+  margin:0 auto 30px;
+}
+.stat-row{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  margin-bottom:34px;
+  flex-wrap:wrap;
+}
+.stat{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(201,162,75,.28);
+  border-radius:10px;
+  padding:14px 20px;
+  min-width:110px;
+}
+.stat b{display:block;font-family:'Cormorant Garamond',serif;font-size:26px;color:var(--gold-light);}
+.stat span{font-size:12px;color:#aeb7cc;}
+.btn{
+  appearance:none;border:none;cursor:pointer;
+  font-family:'Inter',sans-serif;font-weight:700;font-size:15.5px;
+  border-radius:9px;
+  padding:16px 30px;
+  transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.btn-primary{
+  background:linear-gradient(180deg,var(--gold-light),var(--gold));
+  color:#241a04;
+  box-shadow:0 10px 24px -8px rgba(201,162,75,.55);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 28px -8px rgba(201,162,75,.65);}
+.btn-primary:active{transform:translateY(0);}
+.btn-ghost{
+  background:transparent;color:#cdd5e6;
+  border:1px solid rgba(255,255,255,.22);
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,.45);color:#fff;}
+.disclaimer{
+  margin-top:26px;font-size:12.5px;color:#8a93a8;line-height:1.6;
+  max-width:480px;margin-left:auto;margin-right:auto;
+}
+
+/* ---------- quiz screen ---------- */
+#quiz{gap:22px;}
+.progress-shell{
+  display:flex;flex-direction:column;gap:8px;
+}
+.progress-top{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;color:#9aa4bd;}
+.progress-top .block-name{color:var(--gold-light);font-weight:600;}
+.chevrons{
+  display:flex;gap:3px;height:8px;
+}
+.chevron{
+  flex:1;height:100%;background:rgba(255,255,255,.09);
+  border-radius:2px;overflow:hidden;position:relative;
+}
+.chevron i{
+  display:block;height:100%;width:0%;
+  background:linear-gradient(90deg,var(--gold),var(--gold-light));
+  transition:width .35s ease;
+}
+.qcard{
+  background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));
+  border:1px solid rgba(201,162,75,.22);
+  border-radius:16px;
+  padding:30px 26px 26px;
+  animation:cardIn .38s cubic-bezier(.2,.9,.25,1) both;
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.qnum{
+  font-size:12.5px;color:var(--gold-light);font-weight:600;margin-bottom:10px;
+}
+.qtext{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(21px,3.4vw,26px);
+  font-weight:600;
+  line-height:1.32;
+  color:var(--paper);
+  margin:0 0 22px;
+}
+.options{display:flex;flex-direction:column;gap:10px;}
+.opt{
+  display:flex;align-items:center;gap:12px;
+  text-align:left;
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.14);
+  color:#e8ebf3;
+  border-radius:10px;
+  padding:13px 16px;
+  font-size:15px;
+  cursor:pointer;
+  transition:background .15s ease, border-color .15s ease, transform .1s ease;
+}
+.opt:hover:not(.locked){background:rgba(255,255,255,.08);border-color:rgba(201,162,75,.5);}
+.opt:active:not(.locked){transform:scale(.995);}
+.opt .letter{
+  flex:none;width:26px;height:26px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.3);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12.5px;font-weight:700;color:#cfd6e6;
+}
+.opt.locked{cursor:default;}
+.opt.correct{background:rgba(39,107,69,.28);border-color:#3f9968;}
+.opt.correct .letter{background:var(--green);border-color:var(--green);color:#fff;}
+.opt.wrong{background:rgba(156,31,46,.28);border-color:#c1465a;}
+.opt.wrong .letter{background:var(--red);border-color:var(--red);color:#fff;}
+.opt.dim{opacity:.45;}
+.feedback{
+  margin-top:18px;
+  border-radius:10px;
+  padding:13px 15px;
+  font-size:14px;
+  line-height:1.5;
+  display:none;
+  animation:cardIn .3s ease both;
+}
+.feedback.show{display:block;}
+.feedback.ok{background:rgba(39,107,69,.18);border:1px solid rgba(63,153,104,.4);color:#c8ecd6;}
+.feedback.no{background:rgba(156,31,46,.18);border:1px solid rgba(193,70,90,.4);color:#f3cdd3;}
+.feedback b{color:#fff;}
+.qfooter{
+  display:flex;justify-content:space-between;align-items:center;margin-top:8px;
+}
+.score-pill{
+  font-size:12.5px;color:#aeb7cc;
+}
+.next-wrap{min-height:52px;display:flex;justify-content:flex-end;}
+
+/* ---------- results ---------- */
+#results{align-items:stretch;justify-content:center;text-align:center;}
+.rank-badge{width:110px;height:110px;margin:0 auto 18px;animation:riseIn .6s ease both;}
+#results h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,5.5vw,38px);margin:0 0 6px;color:var(--paper);}
+#results .rank-line{color:var(--gold-light);font-size:15px;font-weight:600;margin-bottom:22px;}
+.score-big{
+  font-family:'Cormorant Garamond',serif;
+  font-size:64px;font-weight:700;color:var(--paper);line-height:1;
+}
+.score-of{color:#9aa4bd;font-size:16px;margin-bottom:26px;}
+.bar-outer{
+  height:10px;border-radius:6px;background:rgba(255,255,255,.08);
+  overflow:hidden;max-width:420px;margin:0 auto 30px;
+}
+.bar-inner{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:6px;transition:width .8s cubic-bezier(.2,.9,.25,1);}
+.result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+.review-list{
+  text-align:left;max-width:560px;margin:8px auto 0;
+  max-height:340px;overflow-y:auto;
+  border-top:1px solid rgba(255,255,255,.1);
+  padding-top:16px;
+}
+.review-item{
+  padding:12px 4px;border-bottom:1px solid rgba(255,255,255,.06);
+  font-size:13.5px;color:#c7cee0;line-height:1.5;
+}
+.review-item b{color:var(--gold-light);display:block;margin-bottom:3px;font-weight:600;}
+.review-item .miss{color:#f3b4bd;}
+.review-item .hit{color:#a7ddbc;}
+.review-toggle{
+  background:none;border:none;color:#9aa4bd;font-size:13px;cursor:pointer;
+  text-decoration:underline;margin-top:6px;
+}
+
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-thumb{background:rgba(201,162,75,.4);border-radius:6px;}
+
+@media (max-width:480px){
+  .qcard{padding:22px 18px 20px;}
+  .stat-row{gap:8px;}
+  .stat{padding:11px 14px;min-width:92px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="crest">
+    <svg viewBox="0 0 64 64" fill="none">
+      <path d="M32 4 L56 14 V30 C56 46 46 56 32 60 C18 56 8 46 8 30 V14 Z" fill="#16305e" stroke="#c9a24b" stroke-width="2"/>
+      <path d="M32 12 L48 19 V30 C48 41 41 48 32 51 C23 48 16 41 16 30 V19 Z" fill="#0a1a33"/>
+      <path d="M32 20 v22 M23 26 h18 M26 20 v10 a6 6 0 0 0 12 0 v-10" stroke="#e6c877" stroke-width="2.2" stroke-linecap="round"/>
+    </svg>
+    <div class="crest-text">
+      <div class="kicker">Dirección General de la Policía</div>
+      <h1>Test de Dependencias Orgánicas</h1>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <section id="intro" class="screen active">
+    <div class="badge-hero">
+      <svg viewBox="0 0 64 64" fill="none">
+        <path d="M32 4 L56 14 V30 C56 46 46 56 32 60 C18 56 8 46 8 30 V14 Z" fill="#16305e" stroke="#c9a24b" stroke-width="2"/>
+        <path d="M32 12 L48 19 V30 C48 41 41 48 32 51 C23 48 16 41 16 30 V19 Z" fill="#0a1a33"/>
+        <path d="M32 20 v22 M23 26 h18 M26 20 v10 a6 6 0 0 0 12 0 v-10" stroke="#e6c877" stroke-width="2.2" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h2>Conoce la estructura, domina el organigrama</h2>
+    <p class="lede">67 preguntas, una por cada elemento marcado en el organigrama oficial. Sin cronómetro: avanza a tu ritmo, bloque a bloque, hasta dominar cada dependencia de la DGP.</p>
+    <div class="stat-row">
+      <div class="stat"><b>67</b><span>preguntas</span></div>
+      <div class="stat"><b>11</b><span>bloques</span></div>
+      <div class="stat"><b>0</b><span>presión de tiempo</span></div>
+    </div>
+    <button class="btn btn-primary" id="startBtn" style="align-self:center;">Comenzar la instrucción</button>
+    <p class="disclaimer">El contenido se basa exclusivamente en el documento aportado (DGP.pdf) y no se ha contrastado contra la Orden General/BOE vigente. Si detectas una discrepancia con tu manual de referencia, prevalece el manual oficial.</p>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="screen">
+    <div class="progress-shell">
+      <div class="progress-top">
+        <span class="block-name" id="blockName"></span>
+        <span id="progressCount"></span>
+      </div>
+      <div class="chevrons" id="chevrons"></div>
+    </div>
+
+    <div class="qcard" id="qcard">
+      <div class="qnum" id="qnum"></div>
+      <p class="qtext" id="qtext"></p>
+      <div class="options" id="options"></div>
+      <div class="feedback" id="feedback"></div>
+      <div class="qfooter">
+        <span class="score-pill" id="scorePill"></span>
+        <div class="next-wrap">
+          <button class="btn btn-primary" id="nextBtn" style="display:none;">Siguiente →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" class="screen">
+    <div class="rank-badge" id="rankBadge"></div>
+    <h2>Instrucción completada</h2>
+    <div class="rank-line" id="rankLine"></div>
+    <div class="score-big" id="scoreBig"></div>
+    <div class="score-of" id="scoreOf"></div>
+    <div class="bar-outer"><div class="bar-inner" id="scoreBar"></div></div>
+    <div class="result-actions">
+      <button class="btn btn-primary" id="retryBtn">Repetir el test</button>
+      <button class="btn btn-ghost" id="reviewBtn">Ver errores</button>
+    </div>
+    <div class="review-list" id="reviewList" style="display:none;"></div>
+  </section>
+
+</div>
+
+<script id="quiz-data" type="application/json">[{"title": "Dirección Adjunta Operativa (DAO) y UPEC", "questions": [{"q": "La Estadística Criminal se encuadra dentro de:", "opts": ["El Área de Seguimiento, Inteligencia y Coordinación (UPEC)", "El Área de Planificación y Prospectiva (UPEC)", "La Unidad Central de Inteligencia Criminal (UCIC)", "El Centro Nacional de Comunicaciones (CNC)"], "correct": 0}, {"q": "Los Servicios Extraordinarios dependen de:", "opts": ["El Área de Planificación y Prospectiva (UPEC)", "El Área de Seguimiento, Inteligencia y Coordinación (UPEC)", "La Secretaría General de la UPEC", "El Centro Nacional de Comunicaciones (CNC)"], "correct": 1}, {"q": "El Plan Estratégico de la Policía Nacional se elabora en:", "opts": ["El Área de Seguimiento, Inteligencia y Coordinación (UPEC)", "El Área de Planificación y Prospectiva (UPEC)", "El Gabinete Técnico", "La Unidad de Planificación de Recursos Humanos"], "correct": 1}, {"q": "La sede del Grupo Especial de Operaciones (GEO) se encuentra en:", "opts": ["Madrid", "Ávila", "Guadalajara", "Linares"], "correct": 2}]}, {"title": "Comisaría General de Policía Judicial", "questions": [{"q": "La Oficina Nacional Central de Estupefacientes (ONCE) depende de:", "opts": ["La Secretaría General de la Unidad Central de Coordinación Operativa y Técnica", "La UDYCO", "La Brigada de Coordinación Operativa de la UCOT", "La UDEF"], "correct": 0}, {"q": "La Unidad de Agente Encubierto está integrada en:", "opts": ["La UDEV", "La UDYCO", "La UCIC", "La UCC"], "correct": 1}, {"q": "Los GRECOS (Grupos de Respuesta contra el Crimen Organizado) los dirige:", "opts": ["La Brigada Central de Estupefacientes (BCE)", "La Brigada Central de Crimen Organizado (UDYCO)", "La UDEV", "La UCIC"], "correct": 1}, {"q": "La Brigada Central de Crimen Organizado (UDYCO) es el punto de contacto con:", "opts": ["La Red BDL", "La Red ENFAST", "EUROPOL", "SIRENE"], "correct": 1}, {"q": "La UDYCO figura como unidad adscrita a:", "opts": ["La Fiscalía Especial contra la Corrupción", "La Fiscalía General del Estado (FGE)", "El Ministerio del Interior", "El SEPBLAC"], "correct": 1}, {"q": "Los delitos contra los consumidores, el medio ambiente y el dopaje deportivo se investigan en:", "opts": ["La B.C. de investigación de la delincuencia especializada (UDEV)", "La B.C. de investigación de delitos contra las personas (UDEV)", "La UDEF", "La UCC"], "correct": 1}, {"q": "El SAC (Sistema/Servicio de Análisis Criminal) se aloja en:", "opts": ["La UDEF", "La UCIC", "La UDYCO", "La Comisaría General de Información"], "correct": 1}, {"q": "El fraude financiero es competencia de:", "opts": ["La B.C. de Investigación de Blanqueo de Capitales y Anticorrupción", "La B.C. de delincuencia económica y fiscal", "La B.C. de Inteligencia Financiera (BCIF)", "La B.C. de fraudes informáticos (UCC)"], "correct": 1}, {"q": "La Oficina de Localización de Activos (OLA) pertenece a:", "opts": ["La B.C. de Inteligencia Financiera (BCIF)", "La B.C. de Investigación de Blanqueo de Capitales y Anticorrupción", "La Brigada de Investigación del Banco de España (BIBE)", "La UDYCO"], "correct": 1}, {"q": "La B.C. de Inteligencia Financiera (BCIF) depende funcionalmente de:", "opts": ["El SEPBLAC", "La Brigada de Investigación del Banco de España (BIBE)", "La OLA", "La UCIC"], "correct": 0}, {"q": "La UDEF está adscrita a:", "opts": ["La Fiscalía General del Estado", "La Fiscalía Especial contra la Corrupción y la Criminalidad Organizada", "El SEPBLAC", "El Banco de España"], "correct": 1}, {"q": "El Centro de prevención y respuesta E-CRIME corresponde a:", "opts": ["La UCC", "La UDEF", "La Unidad Central de Apoyo Tecnológico (UCAT)", "La BIT"], "correct": 0}, {"q": "El fraude BEC se investiga en:", "opts": ["La B.C. de investigación tecnológica (BIT)", "La B.C. de seguridad informática (BSI)", "La B.C. de fraudes informáticos", "La UDEF"], "correct": 1}, {"q": "La Brigada Operativa de atención a la Familia y Mujer (BOAFM) depende de:", "opts": ["La UDEV", "La UFAM", "La Comisaría General de Seguridad Ciudadana", "La UCC"], "correct": 1}, {"q": "La Oficina de Estudios en materia de familia y mujer pertenece a:", "opts": ["La UFAM", "La UCIC", "El Gabinete Técnico", "La UCP"], "correct": 0}]}, {"title": "Comisaría General de Seguridad Ciudadana", "questions": [{"q": "La Oficina Nacional de Deportes (OND) depende de:", "opts": ["La Brigada de Coordinación Operativa (Seg. Ciudadana)", "La Jefatura de UIP", "La Unidad Central de Protección (UCP)", "La UCSP"], "correct": 0}, {"q": "La Oficina Central de Asuntos Turísticos se encuadra en:", "opts": ["La Secretaría General de Seguridad Ciudadana", "La Brigada de Coordinación Operativa (Seg. Ciudadana)", "La Jefatura de Unidades Especiales", "La UCPC"], "correct": 1}, {"q": "La protección de personalidades españolas corresponde a:", "opts": ["La Brigada Central de Escoltas", "La Brigada Central de Protecciones Especiales", "La Jefatura de Unidades Especiales", "La UCSP"], "correct": 0}, {"q": "La protección de personalidades extranjeras corresponde a:", "opts": ["La Brigada Central de Escoltas", "La Brigada Central de Protecciones Especiales", "La UCSP", "La Jefatura de UIP"], "correct": 1}, {"q": "El Traslado de Obras de Arte (TOA) es función de:", "opts": ["La Brigada Operativa del Museo del Prado (unidad independiente)", "La Brigada Central de Protecciones Especiales", "La Brigada Central de Escoltas", "La UCSP"], "correct": 1}, {"q": "La HABILITACIÓN de vigilantes de seguridad corresponde a:", "opts": ["La Brigada Central de Inspección e Investigación (UCSP)", "La Brigada Central de empresas y personal (UCSP)", "La UCPC", "La Jefatura de Unidades Especiales"], "correct": 1}, {"q": "El Interlocutor Policial Nacional Sanitario se encuadra directamente en:", "opts": ["La UCSP", "La UCPC", "La UCP", "La Jefatura de UIP"], "correct": 0}, {"q": "El Foro de Interlocución Policial para la Igualdad de Género se encuadra en:", "opts": ["La UCPC", "La UCSP", "El Gabinete Técnico (ONIG)", "La UFAM"], "correct": 1}, {"q": "La Interlocución Nacional en Delitos de Odio corresponde a:", "opts": ["La UCSP", "La Unidad Central de Participación Ciudadana (UCPC)", "La UFAM", "El Gabinete Técnico"], "correct": 1}]}, {"title": "Comisaría General de Policía Científica", "questions": [{"q": "BINCIPOL depende de:", "opts": ["La Brigada de Coordinación Operativa (Policía Científica)", "La Unidad Central de Identificación", "La Unidad Central de Criminalística", "La Unidad Central de Apoyo Tecnológico (UCAT)"], "correct": 0}, {"q": "SAID y EURODAC corresponden a:", "opts": ["La Unidad Central de Identificación", "La Unidad Central de Criminalística", "La Unidad Central de Análisis Científicos", "La Unidad Central de Investigación en la Escena del Delito"], "correct": 0}]}, {"title": "Comisaría General de Extranjería y Fronteras", "questions": [{"q": "El Registro Central de Extranjeros y MENAS depende de:", "opts": ["La Secretaría General de la Comisaría General de Extranjería y Fronteras", "La UCRIF", "La División de Documentación", "La UCR"], "correct": 0}, {"q": "La Oficina Nacional de Redes corresponde a:", "opts": ["La UCRIF", "La UCF", "El CENIF", "La Brigada de Investigación de Redes"], "correct": 0}, {"q": "La lucha contra la Trata de Seres Humanos corresponde a:", "opts": ["La Brigada de Investigación de Redes", "La Brigada Central contra la Trata de Seres Humanos", "La Brigada de Acción Exterior", "La UCF"], "correct": 1}, {"q": "El Puesto Atenas y el sistema FADO corresponden a:", "opts": ["La Brigada Central contra la Trata de Seres Humanos", "La Brigada de Investigación de Redes", "La Brigada de Acción Exterior", "El CENIF"], "correct": 1}, {"q": "La figura del Oficial de Enlace se ubica en:", "opts": ["La Brigada de Acción Exterior", "La Brigada de Investigación de Redes", "La UCF", "El CENIF"], "correct": 0}, {"q": "La BRIC (Brigada de Respuesta a la Inmigración Clandestina) depende de:", "opts": ["La UCRIF", "La Unidad Central de Fronteras (UCF)", "La UCR", "El CENIF"], "correct": 1}, {"q": "El CEFRONT (Centro Nacional de Coordinación de Puestos Fronterizos) depende de:", "opts": ["La Unidad Central de Fronteras (UCF)", "El CENIF", "La UCR", "La UCRIF"], "correct": 0}, {"q": "Los CIE y los CATES dependen de:", "opts": ["La UCF", "La Unidad Central de Repatriaciones (UCR)", "El CENIF", "La UCRIF"], "correct": 1}, {"q": "NFPOC y NCC corresponden a:", "opts": ["La UCF", "El CENIF (Centro Nacional de Inmigración y Fronteras)", "La UCR", "La UCRIF"], "correct": 1}]}, {"title": "División de Operaciones y Transformación Digital", "questions": [{"q": "El 'Observatorio Tecnológico' corresponde a:", "opts": ["El Área de Transformación Digital y Coordinación en Ciberseguridad", "El Área de Desarrollo Tecnológico (UCAT)", "La Unidad Aérea de la Policía", "La Jefatura de Sistemas Especiales"], "correct": 1}]}, {"title": "S.G. de Recursos Humanos y Formación / División de Personal", "questions": [{"q": "La defensa legal del funcionario por actuaciones en el servicio corresponde a:", "opts": ["El Área de Coordinación Jurídica y Reclamaciones Administrativas", "El Área de Asistencia Letrada", "La Unidad de Régimen Disciplinario", "El Área de Asuntos Jurídicos (División de Personal)"], "correct": 1}, {"q": "El absentismo y el Programa de Acción Social se gestionan desde:", "opts": ["El Área de Coordinación de Prevención de Riesgos Laborales", "El Área Sanitaria (Unidad de PRL y Protección Socio-Sanitaria)", "La Unidad de Planificación de Recursos Humanos", "El Área de Análisis Estratégico"], "correct": 1}, {"q": "El Tribunal Médico y la Oficina del Policía dependen de:", "opts": ["La Secretaría General de la División de Personal", "La Unidad de Gestión de Personal Policial", "La Unidad de PRL y Protección Socio-Sanitaria", "La Unidad de Régimen Disciplinario"], "correct": 0}, {"q": "El Catálogo de Puestos de Trabajo se gestiona en:", "opts": ["El Área de Documentación y Expediente Personal", "El Área de Concursos y Baremación", "El Área de Puestos de Trabajo y Distribución Territorial", "La Unidad de Régimen Disciplinario"], "correct": 1}]}, {"title": "División de Formación y Perfeccionamiento (DFP)", "questions": [{"q": "La sede de la Secretaría Permanente de IBERPOL se ubica en:", "opts": ["El Centro de Altos Estudios Policiales (CAEP)", "La Escuela Nacional de Policía (ENP)", "El Centro de Actualización y Especialización (CAE)", "El Centro de Prácticas Operativas (Linares)"], "correct": 1}, {"q": "El campus virtual depende de:", "opts": ["El Área de Régimen Docente (ENP)", "El Área de Régimen Interior (ENP)", "El CAEP", "El CAE"], "correct": 1}, {"q": "El Instituto de Estudios de la Policía (IEP) depende de:", "opts": ["La Escuela Nacional de Policía (ENP)", "El Centro de Altos Estudios Policiales (CAEP)", "El Centro de Actualización y Especialización (CAE)", "El Centro de Prácticas Operativas (Linares)"], "correct": 1}, {"q": "CEPOL se coordina desde:", "opts": ["El Área de Planificación y Coordinación Docente (CAE)", "El Área de Coordinación Formativa Internacional (CAE)", "El IEP (CAEP)", "La ENP"], "correct": 1}]}, {"title": "S.G. de Logística e Innovación, DET y División de Documentación", "questions": [{"q": "La Oficina de Recuperación y Gestión de Activos del Ministerio de Justicia (ORGA) se relaciona con:", "opts": ["El Servicio de Innovación y Desarrollo", "El Servicio de Planificación y Fondos Europeos", "El Gabinete de Asuntos Jurídicos, Económicos y Técnicos", "La Unidad de Informática y Telecomunicación"], "correct": 1}, {"q": "La inhibición de drones corresponde a:", "opts": ["El Área de Informática", "El Área de Telecomunicación", "La Unidad Central de Apoyo Tecnológico (UCAT)", "El Servicio de Innovación y Desarrollo"], "correct": 1}, {"q": "El CPD (Centro de Procesamiento de Datos) de El Escorial depende de:", "opts": ["El Área de Telecomunicación", "El Área de Informática", "La División de Documentación", "La UCAT"], "correct": 1}, {"q": "Las labores de imprenta corresponden a:", "opts": ["La Unidad Económica (DET)", "La Secretaría General de la División Económica y Técnica (DET)", "La Unidad Técnica (DET)", "El Gabinete Técnico"], "correct": 1}, {"q": "La autoescuela se gestiona desde:", "opts": ["El Área de Infraestructuras Policiales", "El Área de Automoción (GOTI)", "El Área de Armamento y Equipamiento Policial", "La Unidad Económica"], "correct": 1}, {"q": "El acceso al registro central de extranjeros, dentro de la División de Documentación, corresponde a:", "opts": ["La Comisaría General de Extranjería y Fronteras", "La Secretaría General de la División de Documentación", "El Área de Documentación de Españoles y Extranjeros", "La DET"], "correct": 1}, {"q": "El Archivo General del MIR depende de:", "opts": ["El Área de Documentación de Españoles y Extranjeros", "El Área de Tratamiento Documental y Archivo", "La Secretaría General de la División de Documentación", "El Gabinete Técnico"], "correct": 1}]}, {"title": "Gabinete Técnico (S.G.)", "questions": [{"q": "La Orden General de la DGP se emite desde:", "opts": ["El Área Jurídica", "La Secretaría General del Gabinete Técnico", "El Área de Publicaciones", "La División de Documentación"], "correct": 1}, {"q": "Las revistas oficiales, el programa editorial y la Fundación Policía Española dependen de:", "opts": ["El Área de Publicaciones", "El Área de Derechos Humanos e Igualdad", "El Servicio de Relaciones Institucionales", "El Área de Coordinación Institucional e Identidad Corporativa"], "correct": 0}, {"q": "La Oficina Central Nacional de Protección de Datos de la Policía Nacional y el Abogado del Estado se encuadran en:", "opts": ["El Área de Publicaciones", "El Área Jurídica", "El Área de Derechos Humanos e Igualdad", "La Secretaría General"], "correct": 1}, {"q": "La Oficina Nacional de Derechos Humanos (ONDH) depende de:", "opts": ["El Área Jurídica", "El Área de Derechos Humanos e Igualdad", "El Área de Coordinación Institucional e Identidad Corporativa", "La UCPC"], "correct": 1}, {"q": "La Oficina Nacional para la Igualdad de Género en la Policía Nacional (ONIG) depende de:", "opts": ["El Área de Coordinación Institucional e Identidad Corporativa", "El Área de Derechos Humanos e Igualdad", "El Foro de Interlocución Policial para la Igualdad de Género (UCSP)", "La UCPC"], "correct": 1}, {"q": "La Oficina de Accesibilidad depende de:", "opts": ["El Área de Coordinación Institucional e Identidad Corporativa", "El Área de Derechos Humanos e Igualdad", "La UCSP", "La División de Documentación"], "correct": 1}, {"q": "La Banda de Música depende de:", "opts": ["El Servicio de Asuntos Generales", "El Servicio de Protocolo", "La Oficina de Marca de la Policía Nacional (como área independiente)", "El Área de Publicaciones"], "correct": 1}, {"q": "La Oficina de Marca de la Policía Nacional depende de:", "opts": ["El Área de Publicaciones", "El Área de Coordinación Institucional e Identidad Corporativa", "El Servicio de Protocolo", "El Área Jurídica"], "correct": 1}]}, {"title": "División de Cooperación Internacional", "questions": [{"q": "El Centro de Comunicaciones Internacionales (CENCI) y la Red BDL dependen de:", "opts": ["La Unidad de Coordinación Internacional (UCI)", "La Secretaría General de la División de Cooperación Internacional", "La Oficina SIRENE", "La Oficina Central Nacional de Interpol"], "correct": 1}, {"q": "Las funciones bilaterales y de representación en la UE corresponden a:", "opts": ["La Oficina Central Nacional de Interpol", "La Unidad de Coordinación Internacional (UCI)", "La Oficina SIRENE", "La Unidad Nacional de Europol"], "correct": 1}, {"q": "Las extradiciones son competencia de:", "opts": ["La Unidad Nacional de Europol", "La Oficina Central Nacional de Interpol", "La Oficina SIRENE", "La UCI"], "correct": 1}, {"q": "OEDE, POST HIT, ADN y Huella corresponden a:", "opts": ["La Oficina Central Nacional de Interpol", "La Oficina SIRENE", "La Unidad Nacional de Europol", "La UCI"], "correct": 1}]}]</script>
+<script>
+const BLOCKS = JSON.parse(document.getElementById('quiz-data').textContent);
+const LETTERS = ['A','B','C','D'];
+
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]] = [arr[j],arr[i]];
+  }
+  return arr;
+}
+
+// flatten with block reference, then shuffle question order and each
+// question's answer order, so every attempt looks different.
+function buildFlat(){
+  let f = [];
+  BLOCKS.forEach((b,bi)=>{
+    b.questions.forEach((q)=>{
+      const order = shuffle([0,1,2,3]);
+      const opts = order.map(i=>q.opts[i]);
+      const correct = order.indexOf(q.correct);
+      f.push({block:b.title, blockIndex:bi, q:q.q, opts, correct});
+    });
+  });
+  return shuffle(f);
+}
+
+let flat = buildFlat();
+let current = 0;
+let score = 0;
+let answers = []; // {picked, correct}
+let locked = false;
+
+const $ = id=>document.getElementById(id);
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  $(id).classList.add('active');
+}
+
+$('startBtn').addEventListener('click', ()=>{
+  showScreen('quiz');
+  buildChevrons();
+  renderQuestion();
+});
+
+function buildChevrons(){
+  const wrap = $('chevrons');
+  wrap.innerHTML = '';
+  flat.forEach(()=>{
+    const c = document.createElement('div');
+    c.className='chevron';
+    c.innerHTML = '<i></i>';
+    wrap.appendChild(c);
+  });
+}
+
+function updateChevrons(){
+  const items = document.querySelectorAll('.chevron i');
+  items.forEach((it,i)=>{
+    it.style.width = i < current ? '100%' : (i===current ? '45%' : '0%');
+  });
+}
+
+function renderQuestion(){
+  locked = false;
+  const item = flat[current];
+  $('blockName').textContent = item.block;
+  $('progressCount').textContent = (current+1) + ' / ' + flat.length;
+  $('qnum').textContent = 'Pregunta ' + (current+1);
+  $('qtext').textContent = item.q;
+  $('scorePill').textContent = 'Aciertos: ' + score + ' / ' + current;
+
+  const optsWrap = $('options');
+  optsWrap.innerHTML = '';
+  item.opts.forEach((opt, idx)=>{
+    const b = document.createElement('button');
+    b.className = 'opt';
+    b.innerHTML = '<span class="letter">'+LETTERS[idx]+'</span><span>'+opt+'</span>';
+    b.addEventListener('click', ()=>selectOption(idx));
+    optsWrap.appendChild(b);
+  });
+
+  $('feedback').className = 'feedback';
+  $('feedback').textContent = '';
+  $('nextBtn').style.display = 'none';
+  updateChevrons();
+
+  // re-trigger card animation
+  const card = $('qcard');
+  card.style.animation = 'none';
+  void card.offsetWidth;
+  card.style.animation = '';
+}
+
+function selectOption(idx){
+  if(locked) return;
+  locked = true;
+  const item = flat[current];
+  const buttons = document.querySelectorAll('.opt');
+  const isCorrect = idx === item.correct;
+  if(isCorrect) score++;
+  answers.push({item, picked:idx, ok:isCorrect});
+
+  buttons.forEach((btn, i)=>{
+    btn.classList.add('locked');
+    if(i === item.correct) btn.classList.add('correct');
+    else if(i === idx) btn.classList.add('wrong');
+    else btn.classList.add('dim');
+  });
+
+  const fb = $('feedback');
+  fb.classList.add('show');
+  if(isCorrect){
+    fb.classList.add('ok');
+    fb.innerHTML = '<b>Correcto.</b> Depende de: ' + item.opts[item.correct];
+  } else {
+    fb.classList.add('no');
+    fb.innerHTML = '<b>No exactamente.</b> La dependencia correcta es: ' + item.opts[item.correct];
+  }
+  $('scorePill').textContent = 'Aciertos: ' + score + ' / ' + (current+1);
+  $('nextBtn').style.display = 'inline-block';
+}
+
+$('nextBtn').addEventListener('click', ()=>{
+  current++;
+  if(current >= flat.length){
+    finish();
+  } else {
+    renderQuestion();
+  }
+});
+
+function rankFor(pct){
+  if(pct === 100) return ['Comisario General','Dominio absoluto del organigrama. Ni un solo elemento fuera de sitio.'];
+  if(pct >= 90) return ['Comisario Principal','Conocimiento de la estructura casi impecable.'];
+  if(pct >= 75) return ['Inspector Jefe','Buen dominio general, algunos matices por afinar.'];
+  if(pct >= 60) return ['Oficial de Policía','Base sólida. Repasa los bloques con más fallos.'];
+  if(pct >= 40) return ['Policía en prácticas','Vas cogiendo el mapa, sigue repasando bloque a bloque.'];
+  return ['Aspirante','Toca estudio de organigrama antes del siguiente intento.'];
+}
+
+function finish(){
+  const pct = Math.round((score/flat.length)*100);
+  const [rankName, rankDesc] = rankFor(pct);
+  showScreen('results');
+  $('rankLine').textContent = rankName + ' — ' + rankDesc;
+  $('scoreBig').textContent = score + ' / ' + flat.length;
+  $('scoreOf').textContent = pct + '% de aciertos';
+  $('rankBadge').innerHTML = `<svg viewBox="0 0 64 64" fill="none">
+    <path d="M32 4 L56 14 V30 C56 46 46 56 32 60 C18 56 8 46 8 30 V14 Z" fill="#16305e" stroke="#c9a24b" stroke-width="2"/>
+    <path d="M32 12 L48 19 V30 C48 41 41 48 32 51 C23 48 16 41 16 30 V19 Z" fill="#0a1a33"/>
+    <text x="32" y="38" text-anchor="middle" font-size="20" fill="#e6c877" font-family="Cormorant Garamond, serif" font-weight="700">${pct}%</text>
+  </svg>`;
+  requestAnimationFrame(()=>{ $('scoreBar').style.width = pct + '%'; });
+
+  buildReview();
+}
+
+function buildReview(){
+  const wrap = $('reviewList');
+  wrap.innerHTML = '';
+  const misses = answers.filter(a=>!a.ok);
+  if(misses.length === 0){
+    wrap.innerHTML = '<div class="review-item hit"><b>Sin errores</b>Has acertado las 67 preguntas. Instrucción perfecta.</div>';
+  } else {
+    misses.forEach(a=>{
+      const d = document.createElement('div');
+      d.className = 'review-item';
+      d.innerHTML = '<b>'+a.item.q+'</b><span class="miss">Tu respuesta: '+a.item.opts[a.picked]+'</span><br><span class="hit">Correcta: '+a.item.opts[a.item.correct]+'</span>';
+      wrap.appendChild(d);
+    });
+  }
+}
+
+$('reviewBtn').addEventListener('click', ()=>{
+  const rl = $('reviewList');
+  rl.style.display = rl.style.display === 'none' ? 'block' : 'none';
+  $('reviewBtn').textContent = rl.style.display === 'none' ? 'Ver errores' : 'Ocultar errores';
+});
+
+$('retryBtn').addEventListener('click', ()=>{
+  flat = buildFlat();
+  current = 0; score = 0; answers = [];
+  showScreen('quiz');
+  renderQuestion();
+});
+</script>
+</body>
+</html>
